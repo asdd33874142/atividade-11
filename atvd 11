@@ -1,0 +1,630 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Definindo a estrutura Aluno
+struct Aluno {
+    string nome;
+    int idade;
+};
+
+// Definindo a classe SistemaCadastro
+class SistemaCadastro {
+private:
+    Aluno alunos[5]; // Array de alunos com tamanho máximo 5
+    int contador; // Contador para controlar o número de alunos cadastrados
+
+public:
+    SistemaCadastro() {
+        contador = 0; // Inicializa o contador como 0
+    }
+
+    // Método para cadastrar um aluno
+    void cadastrarAluno(string nome, int idade) {
+        if (contador < 5) {
+            alunos[contador].nome = nome;
+            alunos[contador].idade = idade;
+            cout << "Aluno " << nome << " cadastrado com sucesso!" << endl;
+            contador++;
+        } else {
+            cout << "Limite máximo de alunos atingido. Não é possível cadastrar mais alunos." << endl;
+        }
+    }
+};
+
+int main() {
+    SistemaCadastro sistema;
+
+    // Cadastro de 5 alunos
+    for (int i = 0; i < 5; i++) {
+        string nome;
+        int idade;
+        cout << "Digite o nome do aluno: ";
+        getline(cin, nome);
+        cout << "Digite a idade do aluno: ";
+        cin >> idade;
+        cin.ignore(); // Limpa o buffer de entrada
+        sistema.cadastrarAluno(nome, idade);
+    }
+
+    return 0;
+} 
+
+atividade 2 
+
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Definindo a estrutura Notas
+struct Notas {
+    float notas[4]; // Array para armazenar as 4 notas
+};
+
+// Definindo a estrutura Aluno
+struct Aluno {
+    string nome;
+    int idade;
+    Notas notas_aluno; // Estrutura para armazenar as notas do aluno
+};
+
+// Definindo a classe SistemaCadastro
+class SistemaCadastro {
+private:
+    Aluno alunos[5]; // Array de alunos com tamanho máximo 5
+    int contador; // Contador para controlar o número de alunos cadastrados
+
+public:
+    SistemaCadastro() {
+        contador = 0; // Inicializa o contador como 0
+    }
+
+    // Método para cadastrar um aluno
+    void cadastrarAluno(string nome, int idade) {
+        if (contador < 5) {
+            alunos[contador].nome = nome;
+            alunos[contador].idade = idade;
+            cout << "Aluno " << nome << " cadastrado com sucesso!" << endl;
+            contador++;
+        } else {
+            cout << "Limite máximo de alunos atingido. Não é possível cadastrar mais alunos." << endl;
+        }
+    }
+
+    // Método para atribuir notas a um aluno
+    void atribuirNotas(int indice) {
+        cout << "Digite as 4 notas (entre 0 e 10) do aluno " << alunos[indice].nome << ":" << endl;
+        for (int i = 0; i < 4; i++) {
+            do {
+                cout << "Nota " << i+1 << ": ";
+                cin >> alunos[indice].notas_aluno.notas[i];
+                if (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10) {
+                    cout << "Nota inválida. Por favor, digite uma nota entre 0 e 10." << endl;
+                }
+            } while (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10);
+        }
+    }
+};
+
+int main() {
+    SistemaCadastro sistema;
+
+    // Cadastro de 5 alunos
+    for (int i = 0; i < 5; i++) {
+        string nome;
+        int idade;
+        cout << "Digite o nome do aluno: ";
+        getline(cin, nome);
+        cout << "Digite a idade do aluno: ";
+        cin >> idade;
+        cin.ignore(); // Limpa o buffer de entrada
+        sistema.cadastrarAluno(nome, idade);
+        sistema.atribuirNotas(i);
+    }
+
+    return 0;
+}
+
+atividade 3 
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Definindo a estrutura Notas
+struct Notas {
+    float notas[4]; // Array para armazenar as 4 notas
+};
+
+// Definindo a estrutura Aluno
+struct Aluno {
+    string nome;
+    int idade;
+    Notas notas_aluno; // Estrutura para armazenar as notas do aluno
+    float nota_total; // Variável para armazenar a nota total
+    float media; // Variável para armazenar a média
+};
+
+// Definindo a classe SistemaCadastro
+class SistemaCadastro {
+private:
+    Aluno alunos[5]; // Array de alunos com tamanho máximo 5
+    int contador; // Contador para controlar o número de alunos cadastrados
+
+public:
+    SistemaCadastro() {
+        contador = 0; // Inicializa o contador como 0
+    }
+
+    // Método para cadastrar um aluno
+    void cadastrarAluno(string nome, int idade) {
+        if (contador < 5) {
+            alunos[contador].nome = nome;
+            alunos[contador].idade = idade;
+            cout << "Aluno " << nome << " cadastrado com sucesso!" << endl;
+            contador++;
+        } else {
+            cout << "Limite máximo de alunos atingido. Não é possível cadastrar mais alunos." << endl;
+        }
+    }
+
+    // Método para atribuir notas a um aluno
+    void atribuirNotas(int indice) {
+        cout << "Digite as 4 notas (entre 0 e 10) do aluno " << alunos[indice].nome << ":" << endl;
+        float soma_notas = 0.0;
+
+        for (int i = 0; i < 4; i++) {
+            do {
+                cout << "Nota " << i+1 << ": ";
+                cin >> alunos[indice].notas_aluno.notas[i];
+                if (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10) {
+                    cout << "Nota inválida. Por favor, digite uma nota entre 0 e 10." << endl;
+                } else {
+                    soma_notas += alunos[indice].notas_aluno.notas[i];
+                }
+            } while (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10);
+        }
+
+        // Calcula a nota total e a média
+        alunos[indice].nota_total = soma_notas;
+        alunos[indice].media = soma_notas / 4;
+
+        // Exibe a nota total e a média
+        cout << "Nota total do aluno " << alunos[indice].nome << ": " << alunos[indice].nota_total << endl;
+        cout << "Média do aluno " << alunos[indice].nome << ": " << alunos[indice].media << endl;
+    }
+};
+
+int main() {
+    SistemaCadastro sistema;
+
+    // Cadastro de 5 alunos
+    for (int i = 0; i < 5; i++) {
+        string nome;
+        int idade;
+        cout << "Digite o nome do aluno: ";
+        getline(cin, nome);
+        cout << "Digite a idade do aluno: ";
+        cin >> idade;
+        cin.ignore(); // Limpa o buffer de entrada
+        sistema.cadastrarAluno(nome, idade);
+        sistema.atribuirNotas(i);
+    }
+
+    return 0;
+}
+ atividade 4 
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Definindo a estrutura Notas
+struct Notas {
+    float notas[4]; // Array para armazenar as 4 notas
+};
+
+// Definindo a estrutura Aluno
+struct Aluno {
+    string nome;
+    int idade;
+    Notas notas_aluno; // Estrutura para armazenar as notas do aluno
+    float nota_total; // Variável para armazenar a nota total
+    float media; // Variável para armazenar a média
+    string resultado; // Variável para armazenar o resultado (Reprovado, Recuperação, Aprovado)
+};
+
+// Definindo a classe SistemaCadastro
+class SistemaCadastro {
+private:
+    Aluno alunos[5]; // Array de alunos com tamanho máximo 5
+    int contador; // Contador para controlar o número de alunos cadastrados
+
+public:
+    SistemaCadastro() {
+        contador = 0; // Inicializa o contador como 0
+    }
+
+    // Método para cadastrar um aluno
+    void cadastrarAluno(string nome, int idade) {
+        if (contador < 5) {
+            alunos[contador].nome = nome;
+            alunos[contador].idade = idade;
+            cout << "Aluno " << nome << " cadastrado com sucesso!" << endl;
+            contador++;
+        } else {
+            cout << "Limite máximo de alunos atingido. Não é possível cadastrar mais alunos." << endl;
+        }
+    }
+
+    // Método para atribuir notas a um aluno
+    void atribuirNotas(int indice) {
+        cout << "Digite as 4 notas (entre 0 e 10) do aluno " << alunos[indice].nome << ":" << endl;
+        float soma_notas = 0.0;
+
+        for (int i = 0; i < 4; i++) {
+            do {
+                cout << "Nota " << i+1 << ": ";
+                cin >> alunos[indice].notas_aluno.notas[i];
+                if (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10) {
+                    cout << "Nota inválida. Por favor, digite uma nota entre 0 e 10." << endl;
+                } else {
+                    soma_notas += alunos[indice].notas_aluno.notas[i];
+                }
+            } while (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10);
+        }
+
+        // Calcula a nota total e a média
+        alunos[indice].nota_total = soma_notas;
+        alunos[indice].media = soma_notas / 4;
+
+        // Determina o resultado do aluno
+        if (alunos[indice].media < 4) {
+            alunos[indice].resultado = "Reprovado";
+        } else if (alunos[indice].media >= 4 && alunos[indice].media < 6) {
+            alunos[indice].resultado = "Recuperação";
+        } else {
+            alunos[indice].resultado = "Aprovado";
+        }
+
+        // Exibe a nota total, a média e o resultado
+        cout << "Nota total do aluno " << alunos[indice].nome << ": " << alunos[indice].nota_total << endl;
+        cout << "Média do aluno " << alunos[indice].nome << ": " << alunos[indice].media << endl;
+        cout << "Resultado do aluno " << alunos[indice].nome << ": " << alunos[indice].resultado << endl;
+    }
+
+    // Método para exibir o resultado geral dos alunos
+    void resultadoGeral() {
+        cout << "\nResultado geral dos alunos:\n" << endl;
+        for (int i = 0; i < contador; i++) {
+            cout << "Aluno: " << alunos[i].nome << " | Resultado: " << alunos[i].resultado << endl;
+        }
+    }
+};
+
+int main() {
+    SistemaCadastro sistema;
+
+    // Cadastro de 5 alunos
+    for (int i = 0; i < 5; i++) {
+        string nome;
+        int idade;
+        cout << "Digite o nome do aluno: ";
+        getline(cin, nome);
+        cout << "Digite a idade do aluno: ";
+        cin >> idade;
+        cin.ignore(); // Limpa o buffer de entrada
+        sistema.cadastrarAluno(nome, idade);
+        sistema.atribuirNotas(i);
+    }
+
+    // Exibir resultado geral dos alunos
+    sistema.resultadoGeral();
+
+    return 0;
+}
+
+atividade 4
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Definindo a estrutura Notas
+struct Notas {
+    float notas[4]; // Array para armazenar as 4 notas
+};
+
+// Definindo a estrutura Aluno
+struct Aluno {
+    string nome;
+    int idade;
+    Notas notas_aluno; // Estrutura para armazenar as notas do aluno
+    float nota_total; // Variável para armazenar a nota total
+    float media; // Variável para armazenar a média
+    string resultado; // Variável para armazenar o resultado (Reprovado, Recuperação, Aprovado)
+};
+
+// Definindo a classe SistemaCadastro
+class SistemaCadastro {
+private:
+    Aluno alunos[5]; // Array de alunos com tamanho máximo 5
+    int contador; // Contador para controlar o número de alunos cadastrados
+
+public:
+    SistemaCadastro() {
+        contador = 0; // Inicializa o contador como 0
+    }
+
+    // Método para cadastrar um aluno
+    void cadastrarAluno(string nome, int idade) {
+        if (contador < 5) {
+            alunos[contador].nome = nome;
+            alunos[contador].idade = idade;
+            cout << "Aluno " << nome << " cadastrado com sucesso!" << endl;
+            contador++;
+        } else {
+            cout << "Limite máximo de alunos atingido. Não é possível cadastrar mais alunos." << endl;
+        }
+    }
+
+    // Método para atribuir notas a um aluno
+    void atribuirNotas(int indice) {
+        cout << "Digite as 4 notas (entre 0 e 10) do aluno " << alunos[indice].nome << ":" << endl;
+        float soma_notas = 0.0;
+
+        for (int i = 0; i < 4; i++) {
+            do {
+                cout << "Nota " << i+1 << ": ";
+                cin >> alunos[indice].notas_aluno.notas[i];
+                if (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10) {
+                    cout << "Nota inválida. Por favor, digite uma nota entre 0 e 10." << endl;
+                } else {
+                    soma_notas += alunos[indice].notas_aluno.notas[i];
+                }
+            } while (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10);
+        }
+
+        // Calcula a nota total e a média
+        alunos[indice].nota_total = soma_notas;
+        alunos[indice].media = soma_notas / 4;
+
+        // Determina o resultado do aluno
+        if (alunos[indice].media < 4) {
+            alunos[indice].resultado = "Reprovado";
+        } else if (alunos[indice].media >= 4 && alunos[indice].media < 6) {
+            alunos[indice].resultado = "Recuperação";
+        } else {
+            alunos[indice].resultado = "Aprovado";
+        }
+
+        // Exibe a nota total, a média e o resultado
+        cout << "Nota total do aluno " << alunos[indice].nome << ": " << alunos[indice].nota_total << endl;
+        cout << "Média do aluno " << alunos[indice].nome << ": " << alunos[indice].media << endl;
+        cout << "Resultado do aluno " << alunos[indice].nome << ": " << alunos[indice].resultado << endl;
+    }
+
+    // Método para exibir o resultado geral dos alunos
+    void resultadoGeral() {
+        cout << "\nResultado geral dos alunos:\n" << endl;
+        for (int i = 0; i < contador; i++) {
+            cout << "Aluno: " << alunos[i].nome << " | Resultado: " << alunos[i].resultado << endl;
+        }
+    }
+};
+
+int main() {
+    SistemaCadastro sistema;
+
+    // Cadastro de 5 alunos
+    for (int i = 0; i < 5; i++) {
+        string nome;
+        int idade;
+        cout << "Digite o nome do aluno: ";
+        getline(cin, nome);
+        cout << "Digite a idade do aluno: ";
+        cin >> idade;
+        cin.ignore(); // Limpa o buffer de entrada
+        sistema.cadastrarAluno(nome, idade);
+        sistema.atribuirNotas(i);
+    }
+
+    // Exibir resultado geral dos alunos
+    sistema.resultadoGeral();
+
+    return 0;
+}
+
+atividade 5 
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Definindo a estrutura Notas
+struct Notas {
+    float notas[4]; // Array para armazenar as 4 notas
+};
+
+// Definindo a estrutura Aluno
+struct Aluno {
+    string nome;
+    int idade;
+    Notas notas_aluno; // Estrutura para armazenar as notas do aluno
+    float nota_total; // Variável para armazenar a nota total
+    float media; // Variável para armazenar a média
+    string resultado; // Variável para armazenar o resultado (Reprovado, Recuperação, Aprovado)
+};
+
+// Definindo a classe SistemaCadastro
+class SistemaCadastro {
+private:
+    Aluno alunos[5]; // Array de alunos com tamanho máximo 5
+    int contador; // Contador para controlar o número de alunos cadastrados
+
+public:
+    SistemaCadastro() {
+        contador = 0; // Inicializa o contador como 0
+    }
+
+    // Método para cadastrar um aluno
+    void cadastrarAluno(string nome, int idade) {
+        if (contador < 5) {
+            alunos[contador].nome = nome;
+            alunos[contador].idade = idade;
+            cout << "Aluno " << nome << " cadastrado com sucesso!" << endl;
+            contador++;
+        } else {
+            cout << "Limite máximo de alunos atingido. Não é possível cadastrar mais alunos." << endl;
+        }
+    }
+
+    // Método para atribuir notas a um aluno
+    void atribuirNotas(int indice) {
+        cout << "Digite as 4 notas (entre 0 e 10) do aluno " << alunos[indice].nome << ":" << endl;
+        float soma_notas = 0.0;
+
+        for (int i = 0; i < 4; i++) {
+            do {
+                cout << "Nota " << i+1 << ": ";
+                cin >> alunos[indice].notas_aluno.notas[i];
+                if (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10) {
+                    cout << "Nota inválida. Por favor, digite uma nota entre 0 e 10." << endl;
+                } else {
+                    soma_notas += alunos[indice].notas_aluno.notas[i];
+                }
+            } while (alunos[indice].notas_aluno.notas[i] < 0 || alunos[indice].notas_aluno.notas[i] > 10);
+        }
+
+        // Calcula a nota total e a média
+        alunos[indice].nota_total = soma_notas;
+        alunos[indice].media = soma_notas / 4;
+
+        // Determina o resultado do aluno
+        determinarResultado(indice);
+
+        // Exibe a nota total, a média e o resultado
+        cout << "Nota total do aluno " << alunos[indice].nome << ": " << alunos[indice].nota_total << endl;
+        cout << "Média do aluno " << alunos[indice].nome << ": " << alunos[indice].media << endl;
+        cout << "Resultado do aluno " << alunos[indice].nome << ": " << alunos[indice].resultado << endl;
+    }
+
+    // Método para determinar o resultado do aluno com base na média
+    void determinarResultado(int indice) {
+        if (alunos[indice].media < 4) {
+            alunos[indice].resultado = "Reprovado";
+        } else if (alunos[indice].media >= 4 && alunos[indice].media < 6) {
+            alunos[indice].resultado = "Recuperação";
+        } else {
+            alunos[indice].resultado = "Aprovado";
+        }
+    }
+
+    // Método para editar o resultado de um aluno
+    void editarResultado(string nome_aluno, string novo_resultado) {
+        for (int i = 0; i < contador; i++) {
+            if (alunos[i].nome == nome_aluno) {
+                alunos[i].resultado = novo_resultado;
+                cout << "Resultado do aluno " << nome_aluno << " editado com sucesso!" << endl;
+                return;
+            }
+        }
+        cout << "Aluno não encontrado." << endl;
+    }
+
+    // Método para exibir o resultado geral dos alunos
+    void resultadoGeral() {
+        cout << "\nResultado geral dos alunos:\n" << endl;
+        for (int i = 0; i < contador; i++) {
+            cout << "Aluno: " << alunos[i].nome << " | Resultado: " << alunos[i].resultado << endl;
+        }
+    }
+
+    // Método para exibir o menu e processar as opções do usuário
+    void exibirMenu() {
+        int opcao;
+        do {
+            cout << "\n--- MENU ---" << endl;
+            cout << "1. Cadastrar aluno" << endl;
+            cout << "2. Atribuir notas a um aluno" << endl;
+            cout << "3. Editar resultado de um aluno" << endl;
+            cout << "4. Exibir resultado geral dos alunos" << endl;
+            cout << "0. Sair" << endl;
+            cout << "Escolha uma opção: ";
+            cin >> opcao;
+
+            switch (opcao) {
+                case 1: {
+                    string nome;
+                    int idade;
+                    cout << "Digite o nome do aluno: ";
+                    cin.ignore(); // Limpa o buffer de entrada
+                    getline(cin, nome);
+                    cout << "Digite a idade do aluno: ";
+                    cin >> idade;
+                    cadastrarAluno(nome, idade);
+                    break;
+                }
+                case 2: {
+                    if (contador > 0) {
+                        int indice;
+                        cout << "Digite o índice do aluno (de 0 a " << contador - 1 << "): ";
+                        cin >> indice;
+                        if (indice >= 0 && indice < contador) {
+                            atribuirNotas(indice);
+                        } else {
+                            cout << "Índice inválido." << endl;
+                        }
+                    } else {
+                        cout << "Nenhum aluno cadastrado ainda." << endl;
+                    }
+                    break;
+                }
+                case 3: {
+                    if (contador > 0) {
+                        string nome;
+                        string novo_resultado;
+                        cout << "Digite o nome do aluno: ";
+                        cin.ignore(); // Limpa o buffer de entrada
+                        getline(cin, nome);
+                        cout << "Digite o novo resultado (Reprovado, Recuperação, Aprovado): ";
+                        getline(cin, novo_resultado);
+                        editarResultado(nome, novo_resultado);
+                    } else {
+                        cout << "Nenhum aluno cadastrado ainda." << endl;
+                    }
+                    break;
+                }
+                case 4: {
+                    if (contador > 0) {
+                        resultadoGeral();
+                    } else {
+                        cout << "Nenhum aluno cadastrado ainda." << endl;
+                    }
+                    break;
+                }
+                case 0:
+                    cout << "Encerrando o programa..." << endl;
+                    break;
+                default:
+                    cout << "Opção inválida. Por favor, escolha uma opção válida." << endl;
+            }
+        } while (opcao != 0);
+    }
+};
+
+int main() {
+    SistemaCadastro sistema;
+
+    sistema.exibirMenu();
+
+    return 0;
+}
+'''3211111111111111233331222333333333333333'1'''2121212132132132121''''''''''''111234rewqqqasddsssssssse321qwwq2qw212wwwwwwwww2w2w
